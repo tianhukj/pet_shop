@@ -256,26 +256,13 @@ app.use('*', (req, res) => {
   }
 });
 
-// 启动服务器
-app.listen(PORT, () => {
-  console.log(`🚀 服务器运行在端口 ${PORT}`);
-  console.log(`📱 API 地址: http://localhost:${PORT}/api`);
-  console.log(`🏥 健康检查: http://localhost:${PORT}/api/health`);
-});
-
-// 优雅关闭
-process.on('SIGTERM', () => {
-  console.log('收到 SIGTERM 信号，正在关闭服务器...');
-  pool.end(() => {
-    console.log('数据库连接池已关闭');
-    process.exit(0);
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`🚀 服务器运行在端口 ${PORT}`);
+    console.log(`📱 API 地址: http://localhost:${PORT}/api/hello`);
+    console.log(`🏥 健康检查: http://localhost:${PORT}/api/health`);
   });
-});
+}
 
-process.on('SIGINT', () => {
-  console.log('收到 SIGINT 信号，正在关闭服务器...');
-  pool.end(() => {
-    console.log('数据库连接池已关闭');
-    process.exit(0);
-  });
-});
+// ❗无论 Vercel 还是本地都要导出 app（Vercel 会用这个）
+module.exports = app;
