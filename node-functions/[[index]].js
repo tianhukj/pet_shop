@@ -264,5 +264,5 @@ if (process.env.VERCEL !== '1') {
   });
 }
 
-// ❗无论 Vercel 还是本地都要导出 app（Vercel 会用这个）
-module.exports = app;
+
+export default app;

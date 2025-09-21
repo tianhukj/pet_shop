@@ -6,7 +6,7 @@
   "framework": "vite",
   "builds": [
     {
-      "src": "server/index.js",
+      "src": "node-function/index.js",
       "use": "@vercel/node"
     }
   ],
