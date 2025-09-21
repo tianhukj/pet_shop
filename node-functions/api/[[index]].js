@@ -37,12 +37,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // 健康检查
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 // 获取套餐列表
-app.get('/api/packages', async (req, res) => {
+app.get('/packages', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM packages ORDER BY price ASC');
     res.json({
@@ -60,7 +60,7 @@ app.get('/api/packages', async (req, res) => {
 });
 
 // 创建预约
-app.post('/api/appointments', async (req, res) => {
+app.post('/appointments', async (req, res) => {
   const { petName, packageId, startTime, endTime, notes, contactPhone } = req.body;
   
   // 验证必填字段
@@ -113,7 +113,7 @@ app.post('/api/appointments', async (req, res) => {
 });
 
 // 获取预约列表
-app.get('/api/appointments', async (req, res) => {
+app.get('/appointments', async (req, res) => {
   const { date } = req.query;
   
   try {
@@ -148,7 +148,7 @@ app.get('/api/appointments', async (req, res) => {
 });
 
 // 获取已占用的时间段
-app.get('/api/appointments/occupied-slots', async (req, res) => {
+app.get('/appointments/occupied-slots', async (req, res) => {
   const { date } = req.query;
   
   if (!date) {
@@ -183,7 +183,7 @@ app.get('/api/appointments/occupied-slots', async (req, res) => {
 });
 
 // 更新预约状态
-app.patch('/api/appointments/:id', async (req, res) => {
+app.patch('/appointments/:id', async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
   
@@ -254,6 +254,5 @@ if (process.env.VERCEL !== '1') {
     console.log(`🏥 健康检查: http://localhost:${PORT}/api/health`);
   });
 }
-
 
 export default app;
