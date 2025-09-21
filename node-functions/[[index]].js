@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import pkg from 'pg';
 import dotenv from 'dotenv';
-import path from 'path';
 
 
 const { Pool } = pkg;
