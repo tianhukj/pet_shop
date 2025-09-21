@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:server": "nodemon node-functions/index.js",
+    "dev:server": "nodemon node-functions/[[index]].js",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\"",
     "build": "tsc -b && vite build",
-    "start": "node node-functions/index.js",
+    "start": "node node-functions/[[index]].js",
     "lint": "eslint .",
     "preview": "vite preview",
     "check": "tsc -b --noEmit"

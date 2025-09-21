@@ -5,15 +5,10 @@ import morgan from 'morgan';
 import pkg from 'pg';
 import dotenv from 'dotenv';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-// ES模块中获取__dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const { Pool } = pkg;
-// 配置dotenv从项目根目录读取.env文件
-dotenv.config({ path: path.join(__dirname, '../.env') });
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -245,9 +240,6 @@ app.use('*', (req, res) => {
       success: false,
       message: 'API 路径不存在'
     });
-  } else if (process.env.NODE_ENV === 'production') {
-    // 生产环境下，非API路径返回前端应用
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
   } else {
     res.status(404).json({
       success: false,
