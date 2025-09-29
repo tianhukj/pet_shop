@@ -232,26 +232,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 处理
-app.use('*', (req, res) => {
-  if (req.originalUrl.startsWith('/api')) {
-    res.status(404).json({
-      success: false,
-      message: 'API 路径不存在'
-    });
-  } else {
-    res.status(404).json({
-      success: false,
-      message: '页面不存在'
-    });
-  }
-});
 
 if (process.env.VERCEL !== '1') {
   app.listen(PORT, () => {
     console.log(`🚀 服务器运行在端口 ${PORT}`);
-    console.log(`📱 API 地址: http://localhost:${PORT}/api/hello`);
-    console.log(`🏥 健康检查: http://localhost:${PORT}/api/health`);
+    console.log(`📱 API 地址: http://localhost:${PORT}/hello`);
+    console.log(`🏥 健康检查: http://localhost:${PORT}/health`);
   });
 }
 
