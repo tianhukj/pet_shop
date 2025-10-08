@@ -56,7 +56,9 @@ export default tseslint.config({
 })
 ```
 
-## 数据库
+## 数据库设置
+
+### 请使用neaoDB，将信息填入.env
 
 ```sql
 -- 1. 建服务套餐表（基础表，带测试数据，确保package_id有有效值）
